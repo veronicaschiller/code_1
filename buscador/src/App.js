@@ -1,12 +1,24 @@
 import React from "react";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import Api from "./Services/Api";
 import "./styles.css";
 function App() {
   const { Input, setInput } = useState('');
 
-function handleSeach(){
-  alert("teste" + Input)
+async function handleSeach(){
+ 
+  if(Input === ''){
+    alert("preencha com algum cep!")
+    return;
+  }
+  try {
+    const response = await Api.get(`${Input/JSON}`);
+    console.log(response.data);
+  } catch  {
+    alert("ops.. erro ao busca")
+    setInput('')
+  }
 }
 
   return (
